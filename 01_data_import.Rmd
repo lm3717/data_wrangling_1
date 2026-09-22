@@ -3,4 +3,45 @@ title: "Data Import"
 output: github_document
 ---
 
+This file is for doing data import.
 
+```{r}
+library(tidyverse)
+```
+
+Importing our first dataset.
+
+```{r}
+litters_df =
+  read_csv(file = 'data/FAS_litters.csv', skip = 0)
+
+litters_df = janitor::clean_names(litters_df)
+```
+
+Import our second dataset
+skipping 3 empty rows
+
+```{r}
+pups_df = 
+  read_csv(file = 'data/FAS_pups.csv', skip = 3)
+
+pups_df = janitor::clean_names(pups_df)
+```
+
+Head or tail
+
+```{r}
+head(litters_df, 20)
+
+tail(pups_df, 5)
+```
+
+Skimming??
+
+```{r}
+skimr::skim(pups_df)
+```
+
+
+
+  
