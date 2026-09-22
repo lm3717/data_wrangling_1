@@ -7,6 +7,8 @@ This file is for doing data import.
 
 ```{r}
 library(tidyverse)
+library(readxl)
+library(haven)
 ```
 
 Importing our first dataset.
@@ -15,7 +17,7 @@ Importing our first dataset.
 litters_df =
   read_csv(
     file = 'data/FAS_litters.csv',
-           na = c("", "NA",)
+           na = c("", "NA")
            )
 
 litters_df = janitor::clean_names(litters_df)
@@ -48,8 +50,60 @@ Skimming??
 ```{r}
 skimr::skim(pups_df)
 ```
+
+## Excel...
+
+Jenny Bryan made 'readxl' to solve all of our problems.
+
+```{r}
+mlb_df = read_excel('data/mlb11.xlsx')
 ```
 
+```{r}
+mlb_df
+```
 
+Load some LOTR data
 
-  
+Import FOTR words
+
+```{r}
+fotr_df=
+  read_excel(
+    "data/LotR_Words.xlsx", 
+             range = "B3:D6")
+fotr_df
+```
+
+Two towers
+
+```{r}
+tt_df=
+  read_excel(
+    "data/LotR_Words.xlsx",
+    range = "F3:H6"
+  )
+
+tt_df
+```
+
+## Import SAS
+
+Read in Pulse dataset
+
+```{r}
+pulse_df =
+  read_sas('data/public_pulse_data.sas7bdat')
+
+pulse_df = janitor::clean_names(pulse_df)
+```
+
+Import pups with 'read_csv()'
+
+```{r}
+pups_df_base = 
+  read.csv("data/FAS_pups.csv")
+
+pups_df_base
+```
+
