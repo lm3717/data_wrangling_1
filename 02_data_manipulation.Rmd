@@ -95,4 +95,41 @@ for pups, make a variable that subtracts 7 from pd_walk
 mutate(pups_df, pd_walk_minus_7 = pd_walk -7)
 ```
 
+```{r}
+arrange(litters_df, pups_born_alive)
+arrange(litters_df, desc(pups_born_alive))
+```
 
+Bad:
+
+```{r}
+litters_df = read_csv("data/FAS_litters,csv")
+litters_rename_df = janitor::clean_names(litters_df)
+litters_with_gd_df = select(litters_rename_df, group, starts_with("gd"))
+```
+
+instead:
+
+```{r}
+litters_df =
+  read_csv("data/FAS_litters.csv", na = c("","NA",".")) |> 
+  janitor::clean_names() |> 
+  select(group, starts_with("gd")) |> 
+  drop_na() |> 
+  mutate(
+    wt_gain = gd18_weight - gd0_weight,
+    group = str_to_lower(group)
+  )
+```
+
+```{r}
+pups_df =
+  read_csv("data/FAS_pups.csv", na = c("","NA",".")) |> 
+  janitor::clean_names() |> 
+  select(litter_number, starts_with("pd")) |> 
+  drop_na() |> 
+  mutate(
+    pd_walk_min_7 = pd_walk - 7)
+```
+
+                            
