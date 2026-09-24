@@ -132,4 +132,35 @@ pups_df =
     pd_walk_min_7 = pd_walk - 7)
 ```
 
-                            
+```{r}
+litters_df |> 
+  lm(gd18_weight ~ gd0_weight, data = _)
+```
+
+# select versus pull
+
+```{r}
+litters_df |> 
+  select(group)
+
+litters_df |> 
+  filter(group %in% c("con7", "con8")) |> 
+  pull(group)
+```
+
+never do $
+
+```{r}
+litters_df$group
+```
+
+pipes and viewing
+
+```{r}
+litters_df |> 
+  filter(group %in% c("con7", "con8")) |> 
+  view() ** dont keep this for markdown
+```
+
+
+
